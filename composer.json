@@ -1,0 +1,22 @@
+{
+  "name": "colorium/runtime",
+  "type": "library",
+  "description": "Runtime resolver library",
+  "homepage": "https://github.com/colorium/runtime",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Aymeric Assier",
+      "email": "aymeric.assier@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Colorium\\Runtime": "/src/Colorium/Runtime/"
+    }
+  }
+}
