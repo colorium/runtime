@@ -35,7 +35,7 @@ class Resource
      * @param array $annotations
      * @param \ReflectionFunctionAbstract $reflector
      */
-    public function __construct(callable $callable, $type, array $annotations, \ReflectionFunctionAbstract $reflector)
+    public function __construct($callable, $type, array $annotations, \ReflectionFunctionAbstract $reflector)
     {
         $this->callable = $callable;
         $this->type = $type;
