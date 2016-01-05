@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Colorium\\Runtime": "/src/Colorium/Runtime/"
+      "Colorium\\Runtime\\": "/src/Colorium/Runtime/"
     }
   }
 }
