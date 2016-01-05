@@ -1,7 +1,7 @@
 {
   "name": "colorium/runtime",
   "type": "library",
-  "description": "Runtime resolver library",
+  "description": "Runtime Resolver, Annotation and Injector",
   "homepage": "https://github.com/colorium/runtime",
   "license": "MIT",
   "authors": [
