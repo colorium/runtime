@@ -103,8 +103,3 @@ $annotations = $resource->annotations(); // ['foo' => 'bar']
 echo $resource->call('You'); // Hello You !
 echo $resource('You'); // Hello You !
 ```
-
-
-## Injectors
-
-comming soon...

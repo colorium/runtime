@@ -1,15 +1,16 @@
 <?php
 
-namespace Colorium\Runtime\Resolver;
+namespace Colorium\Runtime;
 
-use Colorium\Runtime\Injector;
-
-class Resource
+class Invokable
 {
 
     const CLOSURE = 0;
     const STATIC_METHOD = 1;
     const CLASS_METHOD = 2;
+
+    /** @var array */
+    public $params = [];
 
     /** @var callable */
     protected $callable;
@@ -22,9 +23,6 @@ class Resource
 
     /** @var \ReflectionFunctionAbstract */
     protected $reflector;
-
-    /** @var Injector */
-    protected $injector;
 
 
     /**
@@ -114,19 +112,6 @@ class Resource
 
 
     /**
-     * Add injector
-     *
-     * @param Injector $injector
-     * @return $this
-     */
-    public function inject(Injector $injector)
-    {
-        $this->injector = $injector;
-        return $this;
-    }
-
-
-    /**
      * Instanciate class
      *
      * @param array $params
@@ -151,7 +136,7 @@ class Resource
      */
     public function call(...$params)
     {
-        $params = $this->injector->inject($this->reflector, $this->annotations, $params);
+        $params = $params ?: $this->params;
 
         return call_user_func_array($this->callable, $params);
     }
@@ -165,7 +150,7 @@ class Resource
      */
     public function __invoke(...$params)
     {
-        return $this->call($params);
+        return $this->call(...$params);
     }
 
 }

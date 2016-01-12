@@ -2,8 +2,6 @@
 
 namespace Colorium\Runtime;
 
-use Colorium\Runtime\Resolver\Resource;
-
 abstract class Resolver
 {
 
@@ -11,7 +9,7 @@ abstract class Resolver
      * Resolve if callable is static method
      *
      * @param $callable
-     * @return Resource
+     * @return Invokable
      */
     public static function ofStaticMethod($callable)
     {
@@ -28,7 +26,7 @@ abstract class Resolver
                     Annotation::ofClass($callable[0]),
                     Annotation::ofMethod($callable[0], $callable[1])
                 );
-                return new Resource($callable, Resource::STATIC_METHOD, $annotations, $reflector);
+                return new Invokable($callable, Invokable::STATIC_METHOD, $annotations, $reflector);
             }
         }
     }
@@ -38,7 +36,7 @@ abstract class Resolver
      * Resolve if callable is class method
      *
      * @param $callable
-     * @return Resource
+     * @return Invokable
      */
     public static function ofClassMethod($callable)
     {
@@ -55,7 +53,7 @@ abstract class Resolver
                     Annotation::ofClass($callable[0]),
                     Annotation::ofMethod($callable[0], $callable[1])
                 );
-                return new Resource($callable, Resource::CLASS_METHOD, $annotations, $reflector);
+                return new Invokable($callable, Invokable::CLASS_METHOD, $annotations, $reflector);
             }
         }
     }
@@ -65,7 +63,7 @@ abstract class Resolver
      * Resolve if callable is invoke class method
      *
      * @param $callable
-     * @return Resource
+     * @return Invokable
      */
     public static function ofInvokeMethod($callable)
     {
@@ -79,14 +77,14 @@ abstract class Resolver
      * Resolve if callable is closure or function
      *
      * @param $callable
-     * @return Resource
+     * @return Invokable
      */
     public static function ofFunction($callable)
     {
         if($callable instanceof \Closure or (is_string($callable) and function_exists($callable))) {
             $annotations = Annotation::ofFunction($callable);
             $reflector = new \ReflectionFunction($callable);
-            return new Resource($callable, Resource::CLOSURE, $annotations, $reflector);
+            return new Invokable($callable, Invokable::CLOSURE, $annotations, $reflector);
         }
     }
 
@@ -95,7 +93,7 @@ abstract class Resolver
      * Resolve callable to valid resource
      *
      * @param $callable
-     * @return Resource
+     * @return Invokable
      */
     public static function of($callable)
     {
