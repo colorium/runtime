@@ -1,4 +1,4 @@
-# Colorium Runtime Resolver
+# Colorium Runtime Component
 
 - Read docblock annotations
 - Resolve any callable into a formalized `Resource` instance
