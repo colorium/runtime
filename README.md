@@ -1,8 +1,7 @@
-# Colorium Runtime Component
+# Callable resolver and annotation parser
 
 - Read docblock annotations
-- Resolve any callable into a formalized `Resource` instance
-- Inject custom data/factory into callable parameters
+- Resolve any callable into a formalized `Invokable` instance
 
 Exemple :
 
@@ -88,18 +87,22 @@ Translate any valid callable into a resource instance. Callable can be :
 ```php
 use Colorium\Runtime\Resolver;
 
-$resource = Resolver::of('Some::thing');
-if(!$resource){
+$invokable = Resolver::of('Some::thing');
+if(!$invokable){
     // not a valid callable
 }
 
-$resource->isStaticMethod(); // false
-$resource->isClassMethod(); // true
-$resource->isClosure(); // false
+$invokable->isStaticMethod(); // false
+$invokable->isClassMethod(); // true
+$invokable->isClosure(); // false
 
-$foo = $resource->annotation('foo'); // 'bar'
-$annotations = $resource->annotations(); // ['foo' => 'bar']
+$foo = $invokable->annotation('foo'); // 'bar'
+$annotations = $invokable->annotations(); // ['foo' => 'bar']
 
-echo $resource->call('You'); // Hello You !
-echo $resource('You'); // Hello You !
+echo $invokable->call('You'); // Hello You !
+echo $invokable('You'); // Hello You !
 ```
+
+## Install
+
+`composer require colorium/runtime`
