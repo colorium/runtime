@@ -1,10 +1,10 @@
 <?php
 
-namespace Colorium\Runtime\Annotation\Cache;
+namespace Colorium\Runtime\Annotation;
 
-use Colorium\Runtime\Annotation\Cache;
+use Colorium\Runtime\Contract\CacheInterface;
 
-class Ephemeral implements Cache
+class EphemeralCache implements CacheInterface
 {
 
     /** @var array */

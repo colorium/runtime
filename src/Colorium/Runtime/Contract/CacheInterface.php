@@ -1,8 +1,8 @@
 <?php
 
-namespace Colorium\Runtime\Annotation;
+namespace Colorium\Runtime\Contract;
 
-interface Cache
+interface CacheInterface
 {
 
     /**

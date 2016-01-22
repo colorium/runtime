@@ -1,8 +1,8 @@
 <?php
 
-namespace Colorium\Runtime\Annotation\Parser;
+namespace Colorium\Runtime\Annotation;
 
-use Colorium\Runtime\Annotation\Parser;
+use Colorium\Runtime\Contract\ParserInterface;
 
 /**
  * Parse key-value annotations
@@ -14,7 +14,7 @@ use Colorium\Runtime\Annotation\Parser;
  * Todo
  * - @key Some\Class(value)
  */
-class KeyValuePair implements Parser
+class KeyValuePairParser implements ParserInterface
 {
 
     /**

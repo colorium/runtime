@@ -2,29 +2,32 @@
 
 namespace Colorium\Runtime;
 
+use Colorium\Runtime\Contract\CacheInterface;
+use Colorium\Runtime\Contract\ParserInterface;
+
 abstract class Annotation
 {
 
-	/** @var Annotation\Parser */
+	/** @var ParserInterface */
 	protected static $parser;
 
-	/** @var Annotation\Cache */
+	/** @var CacheInterface */
 	protected static $cache;
 
 
 	/**
 	 * Load annotation parser
 	 *
-	 * @param Annotation\Parser $parser
-	 * @return Annotation\Parser
+	 * @param ParserInterface $parser
+	 * @return ParserInterface
 	 */
-	public static function parser(Annotation\Parser $parser = null)
+	public static function parser(ParserInterface $parser = null)
 	{
 		if($parser) {
 			static::$parser = $parser;
 		}
 		elseif(!static::$parser) {
-			static::$parser = new Annotation\Parser\KeyValuePair;
+			static::$parser = new Annotation\KeyValuePairParser;
 		}
 
 		return static::$parser;
@@ -34,16 +37,16 @@ abstract class Annotation
 	/**
 	 * Load annotation cache strategy
 	 * 
-	 * @param Annotation\Cache $cache
-	 * @return Annotation\Cache
+	 * @param CacheInterface $cache
+	 * @return CacheInterface
 	 */
-	public static function cache(Annotation\Cache $cache = null)
+	public static function cache(CacheInterface $cache = null)
 	{
 		if($cache) {
 			static::$cache = $cache;
 		}
 		elseif(!static::$cache) {
-			static::$cache = new Annotation\Cache\Ephemeral;
+			static::$cache = new Annotation\EphemeralCache;
 		}
 
 		return static::$cache;
