@@ -24,6 +24,9 @@ class Invokable
     /** @var \ReflectionFunctionAbstract */
     protected $reflector;
 
+    /** @var bool */
+    protected $instanciated = false;
+
 
     /**
      * Resolved resource
@@ -122,6 +125,7 @@ class Invokable
         $reflector = $this->reflector;
         if($this->isClassMethod() and !is_object($this->callable[0]) and $reflector instanceof \ReflectionMethod) {
             $this->callable[0] = $reflector->getDeclaringClass()->newInstanceArgs($params);
+            $this->instanciated = true;
         }
 
         return $this;
@@ -137,6 +141,9 @@ class Invokable
     public function call(...$params)
     {
         $params = $params ?: $this->params;
+        if(!$this->instanciated) {
+            $this->instanciate();
+        }
 
         return call_user_func_array($this->callable, $params);
     }
